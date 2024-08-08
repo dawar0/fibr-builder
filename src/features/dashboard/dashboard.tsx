@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "@/components/ui/logo";
+import { Spinner } from "@/components/ui/spinner";
 import { Plus, PlusCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -27,12 +28,14 @@ export default function Dashboard() {
   const router = useRouter();
   const session = useSession();
   const [pages, setPages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/builder/page/all", {
       method: "GET",
     })
       .then((res) => {
+        setLoading(false);
         return res.json();
       })
       .then((data) => {
@@ -42,6 +45,7 @@ export default function Dashboard() {
         console.log(error);
       });
   }, []);
+
   return (
     <div className="mx-auto flex max-w-6xl flex-col flex-wrap items-start justify-center gap-6 p-6 sm:flex-row sm:p-8">
       <nav className="flex justify-between w-full">
@@ -86,6 +90,10 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      ) : loading ? (
+        <div className="my-auto h-96 grid place-items-center">
+          <Spinner size={"medium"}></Spinner>
         </div>
       ) : (
         <div className="flex items-center justify-center w-full h-96">

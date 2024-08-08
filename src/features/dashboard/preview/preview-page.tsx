@@ -5,7 +5,9 @@ import { getStylesForBlocks } from "@chaibuilder/sdk/lib";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { loadWebBlocks } from "@chaibuilder/sdk/web-blocks";
+
 loadWebBlocks();
+
 export default function PreviewPage() {
   const [title, setTitle] = useState<string>("");
   const [styles, setStyles] = useState<any>();
@@ -39,6 +41,10 @@ export default function PreviewPage() {
         setBuilderAttributes(data.builderAttributesJSON);
       });
   }, []);
+
+  useEffect(() => {
+    if (title) document.title = title;
+  }, [title]);
 
   return (
     <>
