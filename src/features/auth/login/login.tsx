@@ -26,6 +26,7 @@ export default function LoginForm() {
           <div className="grid gap-4">
             <Button
               className="w-full"
+              variant="outline"
               onClick={() => {
                 signIn("google");
               }}

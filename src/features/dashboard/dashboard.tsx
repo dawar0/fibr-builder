@@ -20,7 +20,7 @@ import {
 import { Logo } from "@/components/ui/logo";
 import { Spinner } from "@/components/ui/spinner";
 import { Plus, PlusCircle } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -54,11 +54,18 @@ export default function Dashboard() {
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage src={session.data?.user?.image || ""} />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>
+                {session.data?.user?.name?.split(" ").map((e) => e[0])}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>Log out</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => signOut()}
+              className="cursor:pointer"
+            >
+              Log out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>
