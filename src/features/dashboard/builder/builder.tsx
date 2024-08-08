@@ -89,21 +89,42 @@ export default function BuilderFullPage() {
 
           return res.status === 200;
         }}
-        topBarComponents={{ left: [() => <TitleBlock title={title} />] }}
+        topBarComponents={{
+          left: [() => <TitleBlock title={title} />],
+          right: [
+            () => (
+              <Button
+                size={"sm"}
+                variant={"outline"}
+                className="text-md font-normal rounded-3xl"
+                onClick={() => {
+                  router.push(`/${id}`);
+                }}
+              >
+                Preview
+              </Button>
+            ),
+          ],
+        }}
       />
     </Dialog>
   );
 }
 
 function TitleBlock({ title }: { title: string }) {
+  const router = useRouter();
+  const { id } = useParams();
   return (
     <div className="flex items-center">
-      <Logo size={"sm"} />
+      <Logo
+        size={"sm"}
+        onClick={() => {
+          router.push("/dashboard");
+        }}
+      />
       <ChevronRight className="w-6 h-6" />
       <DialogTrigger>
-        <h2 className="text-xl font-normal" onClick={() => console.log("hi")}>
-          {title}
-        </h2>
+        <h2 className="text-xl font-normal">{title}</h2>
       </DialogTrigger>
     </div>
   );
