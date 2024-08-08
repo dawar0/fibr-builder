@@ -72,7 +72,7 @@ export default function Dashboard() {
       {pages && pages?.length > 0 ? (
         <div className="grid grid-cols-4 gap-4 w-full">
           {pages.map((page) => (
-            <Card className="h-fit min-w-44">
+            <Card className="h-fit min-w-44" key={page.id}>
               <CardHeader className="pb-4">
                 <CardDescription>Landing Page</CardDescription>
                 <CardTitle className="text-2xl tabular-nums break-words">
@@ -99,8 +99,8 @@ export default function Dashboard() {
         <div className="flex items-center justify-center w-full h-96">
           <div className="flex flex-col items-center">
             <p className="mt-2 text-sm font-normal text-center">
-              We don't have any pages yet <br />
-              Let's create one!
+              We don&apos;t have any pages yet <br />
+              Let&apos;s create one!
             </p>
           </div>
         </div>

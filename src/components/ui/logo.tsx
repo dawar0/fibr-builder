@@ -42,3 +42,4 @@ export const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
     </h1>
   )
 );
+Logo.displayName = "Logo";
